@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ts.mapper.LoginMapper">
+<!--   <select id="select" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT
+      USERID,
+      USERNAME
+    FROM
+      USER
+  </select> -->
+  <select id="checkLogin" resultType="int">
+     SELECT COUNT(Email) FROM masterInfo WHERE Email=#{email} AND Password=#{password}
+  </select>
+  <insert id="register">
+  		INSERT INTO masterInfo (Email,Password,UserName,UserAge)
+  		VALUES (#{email},#{password},#{userName},#{userAge})
+  </insert>
+  <insert id="addnew">
+  		INSERT INTO accountInfo (Website,Account,Encrypted)
+  		VALUES (#{website},#{account},#{encrypted})
+  </insert>
+  <select id="checkAccount" resultType="int">
+  		SELECT COUNT(Account) FROM accountInfo
+  		WHERE Account=#{account} AND Website=#{website}
+  </select>
+   <select id="checkDelete" resultType="int">
+  		SELECT COUNT(Account) FROM accountInfo
+  		WHERE Account=#{account} AND Website=#{website}
+  </select>
+    <select id="checkDecrypt" resultType="int">
+  		SELECT COUNT(Account) FROM accountInfo
+  		WHERE Account=#{account} AND Website=#{website}
+  </select>
+    
+    <select id="checkEmail" resultType="int">
+  		SELECT COUNT(Email) FROM masterInfo
+  		WHERE Email=#{email}
+  </select>
+  <delete id="delete">
+  		DELETE FROM accountInfo 
+  		WHERE Account=#{account} AND Website=#{website}
+  </delete>
+  <select id="checkPassword" resultType="int">
+  		SELECT COUNT(account) FROM accountInfo
+  		WHERE Account=#{account} AND Website=#{website} AND Encrypted=#{encrypted}
+  </select>
+  <update id="update">
+  		UPDATE accountInfo
+  		SET Encrypted = #{newlyEncrypted}
+  		WHERE Account=#{account} AND Website=#{website}
+  </update>
+  <select id="showAll" resultType="com.example.ts.model.ShowModel">
+  	SELECT Account,Encrypted
+  	FROM accountInfo
+  	WHERE Website=#{website}
+  </select>
+  <select id="getEncrypted" resultType="string">
+  	SELECT Encrypted
+  	FROM accountInfo
+  	WHERE Website=#{website} AND Account=#{account}
+  </select>
+<!--   <insert
+      id="insertUser"
+      parameterType="org.mybatis.example.User"
+      flushCache="true"
+      timeout="20">
+  INSERT INTO USER (USERID, USERNAME)
+  VALUES (#{userid}, #{username})
+
+  </insert> -->
+</mapper>

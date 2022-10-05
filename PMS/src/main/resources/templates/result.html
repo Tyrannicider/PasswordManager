@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+		<table>
+			<thead>
+				<tr>
+					<th>アカウント</th>
+					<th>パスワード</th>
+				</tr>
+			</thead>
+			<tbody>
+<!-- 				<tr th:if="${books.empty}">
+					<td colspan="2">No Books Available</td>
+				</tr> -->
+				<tr th:each="account : ${accounts}">
+					<td><span th:text="${account.account}"> アカウント </span></td>
+					<td><span th:text="${account.encrypted}"> 暗号化パスワード </span></td>
+				</tr>
+			</tbody>
+		</table>
+		<hr>
+		<a class="btn btn-outline-success" th:href="@{mainpage}" role="button">戻る</a>
+
+</body>
+</html>
